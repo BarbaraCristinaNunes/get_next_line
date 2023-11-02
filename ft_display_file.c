@@ -41,7 +41,7 @@ void	ft_putstr(char *str)
 	write (1, str, ft_strlen(str));
 }
 
-void	read_file(int fd, char *buffer)
+char	*read_file(int fd, char *buffer)
 {
 	int		bytes_read;
 	char	break_line[1];
@@ -53,6 +53,7 @@ void	read_file(int fd, char *buffer)
 	}
 	if (ft_strfind(buffer, '\n'))
 		buffer[bytes_read] = '\0';
+	return (buffer);
 }
 
 int	check_argc(int argc)
@@ -80,7 +81,7 @@ char	*get_next_line(int fd)
 	buffer = (char *)malloc((BUFFER_SIZE + 1) * sizeof(char));
 	if (buffer == NULL)
 		return (NULL);
-	read_file(fd, buffer);
+	buffer = read_file(fd, buffer);
 	if (buffer[0] == '\0')
 		return (NULL);
 	return (buffer);
