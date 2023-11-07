@@ -6,9 +6,11 @@
 /*   By: banunes <nunes.barbarac@gmail.com>         +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/11/07 12:29:42 by banunes           #+#    #+#             */
-/*   Updated: 2023/11/07 12:30:06 by banunes          ###   ########.fr       */
+/*   Updated: 2023/11/07 12:44:58 by banunes          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
+
+#include "get_next_line.h"
 
 size_t	ft_strlen(const char *s)
 {
@@ -36,7 +38,7 @@ void	ft_putstr(char *str)
 	write (1, str, ft_strlen(str));
 }
 
-static char	*fill_concat_str(char *concat_str, char const *s1,
+char	*fill_concat_str(char *concat_str, char const *s1,
 		char const *s2, int concat_str_length)
 {
 	int	i;

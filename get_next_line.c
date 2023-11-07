@@ -10,10 +10,7 @@
 /*                                                                            */
 /* ************************************************************************** */
 
-#include <unistd.h>
-#include <stdio.h>
-#include <fcntl.h>
-#include <stdlib.h>
+#include "get_next_line.h"
 
 char	*read_file(int fd, char *buffer)
 {
@@ -52,7 +49,6 @@ char	*get_next_line(int fd)
 
 	if (fd < 0 || BUFFER_SIZE == 0)
 	{
-		ft_putstr("File open error");
 		close(fd);
 		return (NULL);
 	}

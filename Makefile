@@ -1,6 +1,7 @@
 NAME = get_next_line
 
-SRCS = get_next_line.c
+SRCS = get_next_line.c \
+		get_next_line_utils.c \
 
 OBJS = $(SRCS:.c=.o)
 
@@ -14,8 +15,8 @@ endif
 
 all: $(NAME)
 
-$(NAME): $(OBJS)
-	gcc $(CFLAGS) -o $(NAME) $(OBJS)
+$(NAME): $(OBJS) get_next_line.h
+	gcc $(CFLAGS) -Iget_next_line.h -o $(NAME) $(OBJS)
 
 clean:
 	rm -f $(OBJS)
