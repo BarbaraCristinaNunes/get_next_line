@@ -90,7 +90,7 @@ char	*read_file(int fd, char *buffer)
 		buffer[bytes_read] = break_line[0];
 		bytes_read++;
 	}
-	if (buffer[0] == '\0')
+	if (!buffer[0])
 		return (NULL);
 	buffer[bytes_read] = '\0';
 	return (buffer);
@@ -121,16 +121,20 @@ char	*get_next_line(int fd)
 	}
 	buffer = (char *)malloc((BUFFER_SIZE + 1) * sizeof(char));
 	temp = (char *)malloc((BUFFER_SIZE + 1) * sizeof(char));
+	buffer = read_file(fd, buffer);
 	if (buffer == NULL)
 		return (NULL);
-	buffer = read_file(fd, buffer);
 	while (!ft_strfind(buffer, '\n'))
 	{
 		temp = read_file(fd, temp);
 		buffer = ft_strjoin(buffer, temp);
 		if (temp == NULL)
-			return (NULL);
+		{
+			free(temp);
+			return (buffer);
+		}
 	}
+	free(temp);
 	return (buffer);
 }
 

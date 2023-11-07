@@ -1,6 +1,6 @@
-NAME = ft_get_next_line
+NAME = get_next_line
 
-SRCS = ft_get_next_line.c
+SRCS = get_next_line.c
 
 OBJS = $(SRCS:.c=.o)
 
