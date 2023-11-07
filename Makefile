@@ -1,6 +1,6 @@
-NAME = ft_display_file
+NAME = ft_get_next_line
 
-SRCS = ft_display_file.c
+SRCS = ft_get_next_line.c
 
 OBJS = $(SRCS:.c=.o)
 
@@ -9,7 +9,7 @@ CFLAGS = -Wall -Wextra -Werror
 ifdef BUFFER_SIZE
     CFLAGS += -D BUFFER_SIZE=$(BUFFER_SIZE)
 else
-    CFLAGS += -D BUFFER_SIZE=19
+    CFLAGS += -D BUFFER_SIZE=2
 endif
 
 all: $(NAME)

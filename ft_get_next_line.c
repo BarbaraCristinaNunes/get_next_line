@@ -15,14 +15,14 @@
 #include <fcntl.h>
 #include <stdlib.h>
 
-int	ft_strlen(char *str)
+size_t	ft_strlen(const char *s)
 {
-	int	i;
+	int	str_length;
 
-	i = 0;
-	while (str[i] != '\0')
-		i++;
-	return (i);
+	str_length = 0;
+	while (s[str_length] != '\0')
+		str_length++;
+	return (str_length);
 }
 
 int	ft_strfind(const char *s, int c)
@@ -41,6 +41,45 @@ void	ft_putstr(char *str)
 	write (1, str, ft_strlen(str));
 }
 
+static char	*fill_concat_str(char *concat_str, char const *s1,
+		char const *s2, int concat_str_length)
+{
+	int	i;
+	int	j;
+
+	i = 0;
+	j = 0;
+	while (s1[i] != '\0' && i <= concat_str_length)
+	{
+		concat_str[i] = s1[i];
+		i++;
+	}
+	while (s2[j] != '\0' && i <= concat_str_length)
+	{
+		concat_str[i] = s2[j];
+		j++;
+		i++;
+	}
+	concat_str[i] = '\0';
+	return (concat_str);
+}
+
+char	*ft_strjoin(char const *s1, char const *s2)
+{
+	char	*concat_str;
+	int		length;
+
+	if (s2 == NULL)
+		return ((char *)s1);
+	if (s1 == NULL)
+		return ((char *)s2);
+	length = ft_strlen(s1) + ft_strlen(s2);
+	concat_str = (char *)malloc(length + 1);
+	if (concat_str == NULL)
+		return (0);
+	return (fill_concat_str(concat_str, s1, s2, length));
+}
+
 char	*read_file(int fd, char *buffer)
 {
 	int		bytes_read;
@@ -51,8 +90,9 @@ char	*read_file(int fd, char *buffer)
 		buffer[bytes_read] = break_line[0];
 		bytes_read++;
 	}
-	if (ft_strfind(buffer, '\n'))
-		buffer[bytes_read] = '\0';
+	if (buffer[0] == '\0')
+		return (NULL);
+	buffer[bytes_read] = '\0';
 	return (buffer);
 }
 
@@ -71,6 +111,7 @@ int	check_argc(int argc)
 char	*get_next_line(int fd)
 {
 	char	*buffer;
+	char	*temp;
 
 	if (fd < 0 || BUFFER_SIZE == 0)
 	{
@@ -79,11 +120,17 @@ char	*get_next_line(int fd)
 		return (NULL);
 	}
 	buffer = (char *)malloc((BUFFER_SIZE + 1) * sizeof(char));
+	temp = (char *)malloc((BUFFER_SIZE + 1) * sizeof(char));
 	if (buffer == NULL)
 		return (NULL);
 	buffer = read_file(fd, buffer);
-	if (buffer[0] == '\0')
-		return (NULL);
+	while (!ft_strfind(buffer, '\n'))
+	{
+		temp = read_file(fd, temp);
+		buffer = ft_strjoin(buffer, temp);
+		if (temp == NULL)
+			return (NULL);
+	}
 	return (buffer);
 }
 
