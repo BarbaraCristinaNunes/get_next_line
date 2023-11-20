@@ -1,12 +1,12 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   ft_display_file.c                                  :+:      :+:    :+:   */
+/*   get_next_line.c                                    :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: banunes <nunes.barbarac@gmail.com>         +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/11/01 09:42:11 by banunes           #+#    #+#             */
-/*   Updated: 2023/11/02 15:40:39 by banunes          ###   ########.fr       */
+/*   Updated: 2023/11/20 14:21:09 by banunes          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -77,13 +77,13 @@ int	main(int argc, char *argv[])
 
 	if (check_argc(argc) == 0)
 		return (0);
-	if (!fopen(argv[1], "r"))
+	file = open(argv[1], O_RDONLY);
+	if (!file)
 	{
 		ft_putstr("Cannot read file.");
 		ft_putstr("\n");
 		return (0);
 	}
-	file = open(argv[1], O_RDONLY);
 	if (file == -1)
 	{
 		ft_putstr("File open error");

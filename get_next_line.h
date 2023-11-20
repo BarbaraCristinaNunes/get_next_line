@@ -6,7 +6,7 @@
 /*   By: banunes <nunes.barbarac@gmail.com>         +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/11/07 12:33:22 by banunes           #+#    #+#             */
-/*   Updated: 2023/11/07 12:46:28 by banunes          ###   ########.fr       */
+/*   Updated: 2023/11/20 14:15:03 by banunes          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -16,6 +16,10 @@
 # include <stdio.h>
 # include <fcntl.h>
 # include <stdlib.h>
+
+# ifndef BUFFER_SIZE
+#  define BUFFER_SIZE 2
+# endif
 
 size_t	ft_strlen(const char *s);
 int		ft_strfind(const char *s, int c);
