@@ -27,5 +27,6 @@ void	ft_putstr(char *str);
 char	*fill_concat_str(char *concat_str, char const *s1,
 			char const *s2, int concat_str_length);
 char	*ft_strjoin(char const *s1, char const *s2);
+char	*get_next_line(int fd);
 
 #endif
