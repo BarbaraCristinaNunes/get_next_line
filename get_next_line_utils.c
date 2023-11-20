@@ -22,15 +22,15 @@ size_t	ft_strlen(const char *s)
 	return (str_length);
 }
 
-int	ft_strfind(const char *s, int c)
+char	*ft_strchr(const char *s, int c)
 {
 	while (*s != (char)c)
 	{
 		if (*s == '\0')
-			return (0);
+			return (NULL);
 		s++;
 	}
-	return (1);
+	return ((char *)s);
 }
 
 void	ft_putstr(char *str)

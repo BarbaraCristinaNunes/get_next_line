@@ -18,7 +18,7 @@ char	*read_file(int fd, char *buffer)
 	char	break_line[1];
 
 	bytes_read = 0;
-	while (bytes_read <= BUFFER_SIZE && !ft_strfind(buffer, '\n')
+	while (bytes_read <= BUFFER_SIZE && !ft_strchr(buffer, '\n')
 		&& read(fd, break_line, 1) > 0)
 	{
 		buffer[bytes_read] = break_line[0];
@@ -57,7 +57,7 @@ char	*get_next_line(int fd)
 	buffer = read_file(fd, buffer);
 	if (buffer == NULL)
 		return (NULL);
-	while (!ft_strfind(buffer, '\n'))
+	while (!ft_strchr(buffer, '\n'))
 	{
 		temp = read_file(fd, temp);
 		buffer = ft_strjoin(buffer, temp);
