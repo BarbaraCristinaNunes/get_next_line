@@ -46,29 +46,34 @@ char	*get_next_line(int fd)
 {
 	char	*buffer;
 	char	*temp;
+	char	*line;
 
 	if (fd < 0 || BUFFER_SIZE == 0)
-	{
-		close(fd);
 		return (NULL);
-	}
 	buffer = (char *)malloc((BUFFER_SIZE + 1) * sizeof(char));
 	temp = (char *)malloc((BUFFER_SIZE + 1) * sizeof(char));
-	buffer = read_file(fd, buffer);
-	if (buffer == NULL)
+	if (!buffer || !temp)
 		return (NULL);
-	while (!ft_strchr(buffer, '\n'))
+	line = read_file(fd, buffer);
+	if (!line)
+	{
+		free(buffer);
+		free(temp);
+		return (NULL);
+	}
+	while (!ft_strchr(line, '\n') && line != NULL)
 	{
 		temp = read_file(fd, temp);
-		buffer = ft_strjoin(buffer, temp);
-		if (temp == NULL)
+		line = ft_strjoin(line, temp);
+		if (!temp)
 		{
 			free(temp);
-			return (buffer);
+			return (line);
 		}
 	}
+	free(buffer);
 	free(temp);
-	return (buffer);
+	return (line);
 }
 
 int	main(int argc, char *argv[])
