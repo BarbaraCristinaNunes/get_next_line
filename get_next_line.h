@@ -22,7 +22,7 @@
 # endif
 
 size_t	ft_strlen(const char *s);
-char	*ft_strchr(const char *s, int c);
+int	ft_strchr(const char *s, char c);
 void	ft_putstr(char *str);
 char	*fill_concat_str(char *concat_str, char const *s1,
 			char const *s2, int concat_str_length);
